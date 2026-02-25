@@ -17,7 +17,7 @@ public class Libro {
 
     public Libro(){}
 
-    public Libro(String titolo, String autore, int annoPubblicazione, boolean disponibile){
+    public Libro(String titolo, String autore, int annoPubblicazione, Boolean disponibile){
         this.titolo = titolo;
         this.autore = autore;
         this.annoPubblicazione = annoPubblicazione;
