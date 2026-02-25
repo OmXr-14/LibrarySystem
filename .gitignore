@@ -1,0 +1,108 @@
+############################
+# ===== GENERAL / OS ===== #
+############################
+
+# Mac OS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.swp
+*.bak
+*.log
+
+############################
+# ===== IDE / EDITORS ===== #
+############################
+
+# VSCode
+.vscode/
+
+# IntelliJ IDEA
+*.iml
+.idea/
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# NetBeans
+nbproject/
+
+############################
+# ===== JAVA ===== #
+############################
+
+# Compiled class files
+*.class
+
+# Maven / Gradle
+target/
+build/
+*.jar
+*.war
+*.ear
+
+# Spring Boot
+application.properties
+application.yml
+
+# JavaFX
+out/
+bin/
+
+############################
+# ===== C / C++ ===== #
+############################
+
+# Object files
+*.o
+*.obj
+*.so
+*.dll
+*.exe
+
+# Precompiled headers
+*.gch
+*.pch
+
+# Static / dynamic libraries
+*.a
+*.lib
+
+# Build directories
+build/
+bin/
+
+############################
+# ===== NODE / JS / TS ===== #
+############################
+
+# Node modules
+node_modules/
+
+# Production build
+dist/
+build/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+############################
+# ===== TEST / COVERAGE ===== #
+############################
+
+coverage/
