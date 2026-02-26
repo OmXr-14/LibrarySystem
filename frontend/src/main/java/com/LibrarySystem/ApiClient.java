@@ -19,6 +19,7 @@ public class ApiClient{
     private static final Gson gson = new Gson();
 
 
+
     public static List<Libro> getTuttiLibri() throws Exception{
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create(BASE_URL + "/libri"))
@@ -32,7 +33,7 @@ public class ApiClient{
 
     public static String prestaLibro(String idUtente, String idLibro) throws Exception{
         HttpRequest request = HttpRequest.newBuilder()
-        .uri(URI.create(BASE_URL +"/prestiti/presta?idUtente=" + idUtente + "&idLibro" + idLibro))
+        .uri(URI.create(BASE_URL +"/prestiti/presta?idUtente=" + idUtente + "&idLibro=" + idLibro))
         .POST(HttpRequest.BodyPublishers.noBody())
         .build();
 
@@ -43,7 +44,16 @@ public class ApiClient{
         }else{
             throw new Exception("ERRORE" + response.statusCode()+ ":" + response.body());
         }
+    }
 
+    public static List<Utente> getTuttiUtenti() throws Exception{
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(BASE_URL + "/utenti"))
+            .GET()
+            .build();
 
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            Type listType = new TypeToken<ArrayList<Utente>> (){}.getType();
+            return gson.fromJson(response.body(), listType);
     }
 }

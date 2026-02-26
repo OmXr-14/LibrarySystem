@@ -47,7 +47,7 @@ public class PrestitiController {
         utente.prendiInPrestito(libro);
         utenteRepository.save(utente);
 
-        return ResponseEntity.ok("Prestito avvenuto con successo: " + libro.getTitolo() + "a " + utente.getName());
+        return ResponseEntity.ok("Prestito avvenuto con successo: " + libro.getTitolo() + " a " + utente.getName());
     }
 
 

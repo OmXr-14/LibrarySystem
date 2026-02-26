@@ -24,7 +24,7 @@ class BibbliotecaTest {
         biblioteca.aggiungereLibro(libro2);
 
         // Creo utente
-        utente1 = new Utente("Mario Rossi",1);
+        utente1 = new Utente("Mario Rossi","1");
         biblioteca.registraUtente(utente1);
     }
 
@@ -37,7 +37,7 @@ class BibbliotecaTest {
     @Test
     void testPrestitoLibro() {
         // Presta libro1 all'utente1
-        Libro prestito = biblioteca.prestitoLibro(1, "Il Signore degli Anelli");
+        Libro prestito = biblioteca.prestitoLibro("1", "Il Signore degli Anelli");
         assertNotNull(prestito);
         assertFalse(prestito.isDisponibile());
         assertEquals(1, utente1.getLibriPrestito().size());
@@ -49,8 +49,8 @@ class BibbliotecaTest {
     @Test
     void testPrestitoLibroNonDisponibile() {
         // Presto libro1 due volte
-        biblioteca.prestitoLibro(1, "Il Signore degli Anelli");
-        Libro secondoPrestito = biblioteca.prestitoLibro(1, "Il Signore degli Anelli");
+        biblioteca.prestitoLibro("1", "Il Signore degli Anelli");
+        Libro secondoPrestito = biblioteca.prestitoLibro("1", "Il Signore degli Anelli");
 
         assertNull(secondoPrestito); // non disponibile
     }
@@ -58,8 +58,8 @@ class BibbliotecaTest {
     @Test
     void testRestituzioneLibro() {
         // Presto e poi restituisco libro1
-        biblioteca.prestitoLibro(1, "Il Signore degli Anelli");
-        biblioteca.restituzioneLibro(1, "Il Signore degli Anelli");
+        biblioteca.prestitoLibro("1", "Il Signore degli Anelli");
+        biblioteca.restituzioneLibro("1", "Il Signore degli Anelli");
 
         // Il libro torna disponibile
         assertTrue(libro1.isDisponibile());
@@ -69,14 +69,14 @@ class BibbliotecaTest {
     @Test
     void testPrestitoLibroUtenteNonEsistente() {
         // Utente inesistente
-        Libro prestito = biblioteca.prestitoLibro(999, "1984");
+        Libro prestito = biblioteca.prestitoLibro("999", "1984");
         assertNull(prestito);
     }
 
     @Test
     void testRestituzioneLibroNonPrestato() {
         // Provo a restituire un libro mai preso
-        biblioteca.restituzioneLibro(1, "1984"); // non l'ha preso
+        biblioteca.restituzioneLibro("1", "1984"); // non l'ha preso
         // Nessun errore, il libro rimane disponibile
         assertTrue(libro2.isDisponibile());
     }

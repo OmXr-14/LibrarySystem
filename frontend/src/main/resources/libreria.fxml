@@ -18,7 +18,7 @@
     <ListView fx:id="listViewLibri" prefHeight="200.0" prefWidth="400.0" />
 
     <HBox spacing="10.0">
-        <TextField fx:id="inputIdUtente" promptText="ID Utente (es. 1)" />
+        <ComboBox fx:id= "comboUtenti" promptText="Seleziona un Utente" prefWidth="150.0" />
         <TextField fx:id="inputIdLibro" promptText="ID Libro (es.1)" />
     </HBox>
 

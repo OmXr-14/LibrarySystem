@@ -4,13 +4,13 @@ public class Libro{
     private String id;
     private String titolo;
     private String autore;
-    private int annoPubblciazione;
+    private int annoPubblicazione;
     private Boolean disponibile;
 
     public Libro(String titolo, String autore, int annoPubblciazione, boolean disponibile){
         this.titolo = titolo;
         this.autore = autore;
-        this.annoPubblciazione = annoPubblciazione;
+        this.annoPubblicazione = annoPubblciazione;
         this.disponibile = true;
     }
 
@@ -18,7 +18,7 @@ public class Libro{
     public String getId(){return id;}
     public String getTitolo(){return titolo;}
     public String getAutore(){return autore;}
-    public int getAnnoPubblicazione(){return annoPubblciazione;}
+    public int getAnnoPubblicazione(){return annoPubblicazione;}
     public boolean isDisponibile(){return disponibile;}
 
     //Setter
@@ -30,7 +30,7 @@ public class Libro{
 
     @Override
     public String toString(){
-        return "[ID: " + id +" ]" + titolo + " di " + autore + " pubblicato il " + annoPubblciazione + (disponibile ? " [Disponibile] " : "[Non disponibile]"  );
+        return "["+id+"]" + titolo + " di " + autore + " pubblicato il " + annoPubblicazione + (disponibile ? " [Disponibile] " : "[Non disponibile]"  );
     }
     
 }

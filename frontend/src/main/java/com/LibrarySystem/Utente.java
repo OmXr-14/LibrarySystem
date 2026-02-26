@@ -4,13 +4,14 @@ import java.util.List;
 
 public class Utente {
     private String name;
-    private int idUtente;
+    private String id;
     private List<Libro> libriPrestito;
 
+    public Utente(){}
 
-    public Utente(String name, int idUtente){
+    public Utente(String name, String id){
         this.name = name;
-        this.idUtente = idUtente;
+        this.id = id;
         this.libriPrestito = new ArrayList<>();
     }
 
@@ -30,13 +31,13 @@ public class Utente {
     }
 
     //Getter 
-    public int getIdUtente(){return idUtente;}
+    public String getIdUtente(){return id;}
     public String getName(){return name;}
 
 
 
     @Override
     public String toString(){
-        return name + "(ID:" + idUtente + ")";
+        return name;
     }
 }

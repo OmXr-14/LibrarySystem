@@ -36,7 +36,7 @@ public class Bibblioteca {
     }
 
     //Prestiti
-    public Libro prestitoLibro(int idUtente, String titoloLibro){
+    public Libro prestitoLibro(String  idUtente, String titoloLibro){
         //Trova Utente
             Utente utente = null;
             for(Utente u : utenti){
@@ -79,7 +79,7 @@ public class Bibblioteca {
 
 
     //Restituzione
-    public void restituzioneLibro(int idUtente, String titoloLibro){
+    public void restituzioneLibro(String idUtente, String titoloLibro){
 
         Utente utente = null;
        for(Utente u : utenti){
