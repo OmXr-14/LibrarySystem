@@ -19,11 +19,10 @@
 
     <HBox spacing="10.0">
         <TextField fx:id="inputIdUtente" promptText="ID Utente (es. 1)" />
-        <TextField fx:id="inputTitoloLibro" promptText="Titolo del Libro" />
+        <TextField fx:id="inputIdLibro" promptText="ID Libro (es.1)" />
     </HBox>
 
     <HBox spacing="10.0">
         <Button onAction="#gestisciPrestito" text="Presta Libro" />
-        <Button onAction="#gestisciRestituzione" text="Restituisci Libro" />
     </HBox>
 </VBox>
