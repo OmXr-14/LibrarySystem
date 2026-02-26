@@ -3,14 +3,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
 import java.util.*;
 
 public class LibraryController{
 
-    @FXML private ListView<String> listViewLibri;
+    @FXML private ListView<String> listViewLibriD;
+    @FXML private ListView<String> listViewLibriN;
     @FXML private ComboBox<Utente> comboUtenti;
-    @FXML private TextField inputIdLibro;
+    @FXML private ComboBox<Libro> comboLibri;
 
     @FXML
     public void initialize(){
@@ -21,42 +21,21 @@ public class LibraryController{
         }catch(Exception e){
             System.err.println("Impossibile caricare gli utenti: " + e.getMessage());
         }
-
-        listViewLibri.getSelectionModel().selectedItemProperty().addListener((observable, odlValue, newValue)->{
-            if(newValue!=null){
-                try{
-                int indiceInzio = newValue.indexOf("[") +1;
-                int indiceFine = newValue.indexOf("]");
-
-                if(indiceInzio > 0 && indiceFine > indiceInzio){
-                    String idEstratto = newValue.substring(indiceInzio,indiceFine);
-
-                    inputIdLibro.setText(idEstratto);
-                }
-            }catch(Exception e ){
-                System.err.println("Errore durante l'estrazione dell'ID: " + e.getMessage());
-            }
-            }
-        });
     }
 
     @FXML
     public void gestisciPrestito(){
 
         Utente utenteselezionato = comboUtenti.getValue();
-        String idLibro = inputIdLibro.getText().trim();
+        Libro libroSelezionato = comboLibri.getValue();
 
-        if(utenteselezionato == null || idLibro.isEmpty()){
-            mostraMessaggio("Errore", "Inserisci sia ID utente che ID Libro");
-            return;
-        }
-        if (utenteselezionato.getIdUtente() == null) {
-            mostraMessaggio("Errore Critico", "L'ID dell'utente è NULL! Gson non lo sta leggendo bene.");
+        if(utenteselezionato == null || comboLibri == null){
+            mostraMessaggio("Errore", "Inserisci l'Utente che il Libro");
             return;
         }
 
         try{
-            String risultato = ApiClient.prestaLibro(utenteselezionato.getIdUtente().trim(), idLibro);
+            String risultato = ApiClient.prestaLibro(utenteselezionato.getId().trim(), libroSelezionato.getId().trim());
             mostraMessaggio("Esito Prestito", risultato);
 
             aggiornaListaLibri();
@@ -67,17 +46,48 @@ public class LibraryController{
     }
 
 
+    @FXML
+    public void gestisciRestituzione(){
+        Utente utenteSelezionato = comboUtenti.getValue();
+        Libro libroSelezionato = comboLibri.getValue();
+
+          if(utenteSelezionato == null || comboLibri == null){
+            mostraMessaggio("Errore", "Inserisci l'Utente che il Libro");
+            return;
+        }
+
+        try{
+            String risultato = ApiClient.restituisciLibro(utenteSelezionato.getId().trim(), libroSelezionato.getId().trim());
+            mostraMessaggio("Esito Restituzione", risultato);
+
+            aggiornaListaLibri();
+        }catch(Exception e){
+            mostraMessaggio("Errore dal Server", e.getMessage());
+        }
+
+        
+    }
+
+
 
     private void aggiornaListaLibri(){
         try{
             List<Libro> libriDalServer = ApiClient.getTuttiLibri();
-            listViewLibri.getItems().clear();
+            listViewLibriD.getItems().clear();
+            listViewLibriN.getItems().clear();
+
+            comboLibri.getItems().clear();
+            comboLibri.getItems().addAll(libriDalServer);
 
             for(Libro l : libriDalServer){
-                listViewLibri.getItems().add(l.toString());
+                if(l.isDisponibile()){
+                listViewLibriD.getItems().add(l.toString());
+                }else{
+                    listViewLibriN.getItems().add(l.toString());
+                }
             }
         }catch(Exception e ){
-            mostraMessaggio("Errore di connessione","Impossibile caricare i libri");
+            mostraMessaggio("Errore", "Impossibile caricare i libri: " + e.getMessage());
         }
     }
 

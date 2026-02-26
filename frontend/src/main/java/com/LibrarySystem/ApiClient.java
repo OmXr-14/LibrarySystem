@@ -46,6 +46,20 @@ public class ApiClient{
         }
     }
 
+    public static String restituisciLibro(String idUtente, String idLibro) throws Exception{
+        HttpRequest request = HttpRequest.newBuilder()
+        .uri(URI.create(BASE_URL+"/prestiti/restituisci?idUtente=" + idUtente + "&idLibro=" +idLibro))
+        .POST(HttpRequest.BodyPublishers.noBody())
+        .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        if(response.statusCode()== 200){
+            return "SUCCESSO: " + response.body();
+        }else{
+            throw new Exception("ERRORE" + response.statusCode() + ":" + response.body());
+        }
+    }
+
     public static List<Utente> getTuttiUtenti() throws Exception{
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create(BASE_URL + "/utenti"))

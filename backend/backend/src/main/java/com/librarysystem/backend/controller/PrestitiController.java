@@ -63,6 +63,23 @@ public class PrestitiController {
         Utente utente = utenteOpt.get();
         Libro libro = libroOpt.get();
 
+        if(libro.getDisponibile()){
+            return ResponseEntity.badRequest().body("Impossibile restituire: Il libro è già disponibile in biblioteca.");
+        }
+
+        boolean utenteHaLibro = false;
+
+        for(Libro l : utente.getLibriPrestito()){
+            if(l.getId().equals(libro.getId())){
+                utenteHaLibro = true;
+                break;
+            }
+        }
+
+        if(!utenteHaLibro){
+            return ResponseEntity.badRequest().body("Attenzione: Questo utente non ha in prestito questo libro!");
+        }
+
         //Aggiorna stato del libro 
         libro.setDisponibile(true);
         libroRepository.save(libro);

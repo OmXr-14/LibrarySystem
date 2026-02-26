@@ -30,7 +30,7 @@ public class Libro{
 
     @Override
     public String toString(){
-        return "["+id+"]" + titolo + " di " + autore + " pubblicato il " + annoPubblicazione + (disponibile ? " [Disponibile] " : "[Non disponibile]"  );
+        return titolo + " di " + autore + " pubblicato il " + annoPubblicazione + (disponibile ? " [Disponibile] " : " [Non disponibile]"  );
     }
     
 }

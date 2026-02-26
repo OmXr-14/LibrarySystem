@@ -40,7 +40,7 @@ public class Bibblioteca {
         //Trova Utente
             Utente utente = null;
             for(Utente u : utenti){
-                if(u.getIdUtente()==idUtente){
+                if(u.getId()==idUtente){
                     utente = u;
                     break;
                 }
@@ -83,7 +83,7 @@ public class Bibblioteca {
 
         Utente utente = null;
        for(Utente u : utenti){
-                if(u.getIdUtente()==idUtente){
+                if(u.getId()==idUtente){
                     utente = u;
                     break;
                 }
